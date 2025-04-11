@@ -3,14 +3,14 @@ import Link from "next/link";
 import ThemeChanger from "./DarkSwitch";
 import Image from "next/image"
 import { Disclosure } from "@headlessui/react";
+import { ClientLink } from "./ClientLink";
 
 export const Navbar = () => {
   const navigation = [
-    "Product",
-    "Features",
-    "Pricing",
-    "Company",
-    "Blog",
+    "Vantaggi",
+    "Come Funziona",
+    "Testimonianze",
+    "FAQ",
   ];
 
   return (
@@ -28,23 +28,27 @@ export const Navbar = () => {
                   className="w-8"
                 />
               </span>
-            <span>Nextly</span>
+            <span>RemoteEcho</span>
           </span>
         </Link>
 
-        {/* get started  */}
+        {/* contattaci  */}
         <div className="gap-3 nav__item mr-2 lg:flex ml-auto lg:ml-0 lg:order-2">
             <ThemeChanger />
             <div className="hidden mr-3 lg:flex nav__item">
-              <Link href="/" className="px-6 py-2 text-white bg-indigo-600 rounded-md md:ml-5">
-                Get Started
-              </Link>
+              <ClientLink 
+                href="/"
+                eventName="contactUs"
+                className="px-6 py-2 text-white bg-indigo-600 rounded-md md:ml-5"
+              >
+                Contattaci
+              </ClientLink>
             </div>
         </div>
                 
         <Disclosure>
           {({ open }) => (
-            <>
+            <div>
                 <Disclosure.Button
                   aria-label="Toggle Menu"
                   className="px-2 py-1 text-gray-500 rounded-md lg:hidden hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:text-gray-300 dark:focus:bg-trueGray-700">
@@ -69,7 +73,7 @@ export const Navbar = () => {
                 </Disclosure.Button>
 
                 <Disclosure.Panel className="flex flex-wrap w-full my-5 lg:hidden">
-                  <>
+                  <div>
                     {navigation.map((item, index) => (
                       <Link key={index} href="/" className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none">
                           {item}
@@ -78,9 +82,9 @@ export const Navbar = () => {
                     <Link href="/" className="w-full px-6 py-2 mt-3 text-center text-white bg-indigo-600 rounded-md lg:ml-5">         
                         Get Started
                     </Link>
-                  </>
+                  </div>
                 </Disclosure.Panel>
-            </>
+            </div>
           )}
         </Disclosure>
         

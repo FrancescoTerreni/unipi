@@ -11,46 +11,46 @@ import benefitOneImg from "../../public/img/benefit-one.png";
 import benefitTwoImg from "../../public/img/benefit-two.png";
 
 const benefitOne = {
-  title: "Highlight your benefits",
-  desc: "You can use this space to highlight your first benefit or a feature of your product. It can also contain an image or Illustration like in the example along with some bullet points.",
+  title: "I vantaggi della diagnostica remota",
+  desc: "Anziani, pazienti fragili, comunità isolate o in emergenza: tutti possono ricevere una diagnosi rapida, sicura e non invasiva.",
   image: benefitOneImg,
   bullets: [
     {
-      title: "Understand your customers",
-      desc: "Then explain the first point breifly in one or two lines.",
+      title: "Riduce gli spostamenti del paziente",
+      desc: "Perfetto per chi ha difficoltà motorie o vive in aree remote.",
       icon: <FaceSmileIcon />,
     },
     {
-      title: "Improve acquisition",
-      desc: "Here you can add the next benefit point.",
+      title: "Controllo medico in tempo reale",
+      desc: "L'operatore sanitario guida il robot da remoto, mantenendo il rigore clinico.",
       icon: <ChartBarSquareIcon />,
     },
     {
-      title: "Drive customer retention",
-      desc: "This will be your last bullet point in this section.",
+      title: "Meno stress, più continuità di cura",
+      desc: "Un'esperienza meno invasiva per il paziente, più fluida per il sistema sanitario.",
       icon: <CursorArrowRaysIcon />,
     },
   ],
 };
 
 const benefitTwo = {
-  title: "Offer more benefits here",
-  desc: "You can use this same layout with a flip image to highlight your rest of the benefits of your product. It can also contain an image or Illustration as above section along with some bullet points.",
+  title: "Una tecnologia concreta, pensata per le persone",
+  desc: "Vogliamo dimostrare che è già possibile usare la robotica in modo semplice e umano, per migliorare la vita di pazienti e medici, senza allontanare nessuno dal contatto clinico.",
   image: benefitTwoImg,
   bullets: [
     {
-      title: "Mobile Responsive Template",
-      desc: "Nextly is designed as a mobile first responsive template.",
+      title: "Più equità nell’accesso alla salute",
+      desc: "Diminuisce il divario tra grandi città e territori marginali.",
       icon: <DevicePhoneMobileIcon />,
     },
     {
-      title: "Powered by Next.js & TailwindCSS",
-      desc: "This template is powered by latest technologies and tools.",
+      title: "Riduzione dei tempi diagnostici",
+      desc: "Possibilità di eseguire ecografie direttamente in loco, senza attese.",
       icon: <AdjustmentsHorizontalIcon />,
     },
     {
-      title: "Dark & Light Mode",
-      desc: "Nextly comes with a zero-config light & dark mode. ",
+      title: "Formazione e collaborazione a distanza",
+      desc: "Specialisti e studenti possono operare insieme anche da sedi diverse.",
       icon: <SunIcon />,
     },
   ],
