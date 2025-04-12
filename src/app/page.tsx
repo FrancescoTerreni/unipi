@@ -21,34 +21,44 @@ export default function Home() {
         Una risposta concreta per aree rurali, strutture isolate, pazienti fragili o impossibilitati a spostarsi.
       </SectionTitle>
 
-      <Benefits data={benefitOne} />
-      <Benefits imgPos="right" data={benefitTwo} />
+      <section id="vantaggi">
+        <Benefits data={benefitOne} />
+        <Benefits imgPos="right" data={benefitTwo} />
+      </section>
 
-      <SectionTitle
-        preTitle="Guarda il video"
-        title="Scopri come funziona l’ecografia a distanza"
-      >
-        In questo breve video ti mostriamo come la robotica e la telemedicina possono collaborare per eseguire un’ecografia remota in tempo reale.
-      </SectionTitle>
+      <section id="video">
+        <SectionTitle
+          preTitle="Guarda il video"
+          title="Scopri come funziona l’ecografia a distanza"
+        >
+          In questo breve video ti mostriamo come la robotica e la telemedicina possono collaborare per eseguire un’ecografia remota in tempo reale.
+        </SectionTitle>
 
-      <Video videoId="eq0vXSkse7k" />
+        <Video videoId="eq0vXSkse7k" />
+      </section>
 
-      <SectionTitle
-        preTitle="Testimonianze"
-        title="Cosa dicono della Tele-ecografia"
-      >
-        Ecco cosa raccontano medici, pazienti e professionisti della salute che hanno provato la tele-ecografia guidata da remoto.
-        Una tecnologia che convince, perché funziona.
-      </SectionTitle>
+      <section id="testimonianze">
+        <SectionTitle
+          preTitle="Testimonianze"
+          title="Cosa dicono della Tele-ecografia"
+        >
+          Ecco cosa raccontano medici, pazienti e professionisti della salute che hanno provato la tele-ecografia guidata da remoto.
+          Una tecnologia che convince, perché funziona.
+        </SectionTitle>
 
-      <Testimonials />
+        <Testimonials />
+      </section>
 
-      <SectionTitle preTitle="FAQ" title="Domande frequenti">
-        Dalla sicurezza al funzionamento: tutto quello che c’è da sapere sull’ecografia remota guidata da robot, spiegato in modo chiaro.
-      </SectionTitle>
+      <section id="faq">
+        <SectionTitle preTitle="FAQ" title="Domande frequenti">
+          Dalla sicurezza al funzionamento: tutto quello che c’è da sapere sull’ecografia remota guidata da robot, spiegato in modo chiaro.
+        </SectionTitle>
 
-      <Faq />
+        <Faq />
+      </section>
+
       <Cta />
+
     </Container>
   );
 }
