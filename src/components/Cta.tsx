@@ -2,7 +2,6 @@
 
 import React from "react";
 import { useReactions } from '@/contexts/ReactionContext';
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { Container } from "@/components/Container";
 import { setReactionCount } from "../../lib/supabase/procedures";
 import { sendGTMEvent } from '@next/third-parties/google'
@@ -12,7 +11,6 @@ import { REACTION_LIKE } from "../../lib/supabase/constants/reaction";
 export const Cta = () => {
 
   const reactionsState = useReactions();
-  const [interacted, setInteracted] = useLocalStorage('interacted');
 
   /**
    * Write on database for liked elements, and after sent the event to GA4.
@@ -20,15 +18,15 @@ export const Cta = () => {
   */
  
   const likeAction = async () => {
-    if (!interacted) {
+    if (!reactionsState.interacted) {
       const newCount = await setReactionCount(REACTION_LIKE);
       reactionsState.setReaction((prev) => ({...prev, like: newCount }))
       sendGTMEvent({ event: LIKE_CLICK, value: newCount })
-      setInteracted(true);
+      reactionsState.setInteracted(true);
     }
   }
 
-  const displayGreetings = interacted ? ` 🎉 ${reactionsState.like} Grazie! :) ` : `❤️ ${reactionsState.like} Likes`;
+  const displayGreetings = reactionsState.interacted ? ` 🎉 ${reactionsState.like} Grazie! :) ` : `❤️ ${reactionsState.like} Likes`;
 
   return (
     <Container>

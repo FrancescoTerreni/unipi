@@ -2,18 +2,23 @@
 
 import React, { createContext, useContext, useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { REACTION_LIKE } from '../../lib/supabase/constants/reaction';
+import { INTERACTED_KEY } from '../../lib/localStorage/constants';
 import { ReactionType } from '../../lib/supabase/types/reaction';
 import { LoadingType } from '@/types';
 import { getReactionCount } from '../../lib/supabase/procedures';
 
 type ReactionCounts = Record<ReactionType, number | null>;
 type ReactionState = ReactionCounts & LoadingType & {
+  interacted: Boolean | string | null;
+  setInteracted: Dispatch<Boolean>;
   setReaction: Dispatch<SetStateAction<ReactionState>>;
 };
 
 const defaultValues: ReactionState = {
   like: null,
   loading: false,
+  interacted: false,
+  setInteracted: () => {},
   setReaction: () => {},
 };
 
@@ -31,7 +36,8 @@ export const ReactionProvider = ({ children }: { children: React.ReactNode }) =>
 
   useEffect(() => {
     const fetchCounts = async () => {
-      setReaction((prev) => ({ ...prev, loading: true }));
+      const item = localStorage.getItem(INTERACTED_KEY);
+      setReaction((prev) => ({ ...prev, loading: true, interacted: item }));
       const count = await getReactionCount(REACTION_LIKE);
       setReaction((prev) => ({ ...prev, like: count, loading: false }));
     };
@@ -39,8 +45,17 @@ export const ReactionProvider = ({ children }: { children: React.ReactNode }) =>
     fetchCounts();
   }, []);
 
+  const setInteracted = (value: Boolean) => {
+    try {
+      localStorage.setItem(INTERACTED_KEY, JSON.stringify(value));
+      setReaction((prev) => ({ ...prev, interacted: value }));
+    } catch (error) {
+      console.warn(`Errore nel salvare ${INTERACTED_KEY} su localStorage`, error);
+    }
+  }
+
   return (
-    <ReactionContext.Provider value={{ ...reaction, setReaction }}>
+    <ReactionContext.Provider value={{ ...reaction, setReaction, setInteracted }}>
       {children}
     </ReactionContext.Provider>
   );

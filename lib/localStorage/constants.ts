@@ -1,0 +1,1 @@
+export const INTERACTED_KEY = 'interacted';

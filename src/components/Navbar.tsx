@@ -5,7 +5,6 @@ import { isNil } from "lodash";
 import { Disclosure } from "@headlessui/react";
 import { ClientLink } from "./ClientLink";
 import { useReactions } from '@/contexts/ReactionContext';
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { setReactionCount } from "../../lib/supabase/procedures";
 import { REACTION_LIKE } from "../../lib/supabase/constants/reaction";
 import { LIKE_CLICK, MENU_CLICK } from "../../lib/analytics/events";
@@ -15,7 +14,6 @@ import { navigation } from "../../lib/structure/constants";
 export const Navbar = () => {
 
   const reactionsState = useReactions();
-  const [interacted, setInteracted] = useLocalStorage('interacted');
 
   /**
    * Write on database for liked elements, and after sent the event to GA4.
@@ -23,15 +21,15 @@ export const Navbar = () => {
   */
 
   const likeAction = async () => {
-    if (!interacted) {
+    if (!reactionsState.interacted) {
       const newCount = await setReactionCount(REACTION_LIKE);
       reactionsState.setReaction((prev) => ({...prev, like: newCount }))
-      sendGTMEvent({ event: LIKE_CLICK, value: newCount })
-      setInteracted(true);
+      sendGTMEvent({ event: LIKE_CLICK, value: newCount, })
+      reactionsState.setInteracted(true)
     }
   }
 
-  const displayGreetings = interacted ? ` 🎉 ${reactionsState.like} Grazie! :) ` : `❤️ ${reactionsState.like} Likes`;
+  const displayGreetings = reactionsState.interacted ? ` 🎉 ${reactionsState.like} Grazie! :) ` : `❤️ ${reactionsState.like} Likes`;
 
   return (
     <div className="w-full">
