@@ -4,3 +4,7 @@ export interface PageProps {
   };
   searchParams: {};
 }
+
+export interface LoadingType {
+  loading: Boolean
+}

@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import { Container } from "@/components/Container";
+import { sendGTMEvent } from '@next/third-parties/google'
+import { VIDEO_PLAYED } from "../../lib/analytics/events";
 
 interface VideoProps {
   videoId: string;
@@ -8,6 +10,11 @@ interface VideoProps {
 
 export function Video({ videoId }: Readonly<VideoProps>) {
   const [playVideo, setPlayVideo] = useState(false);
+  
+  const startVideo = () => {
+    setPlayVideo(!playVideo);
+    sendGTMEvent({ event: VIDEO_PLAYED });
+  }
 
   if (!videoId) return null;
 
@@ -16,7 +23,7 @@ export function Video({ videoId }: Readonly<VideoProps>) {
       <div className="relative w-full h-[500px] max-w-4xl mx-auto overflow-hidden lg:mb-20 rounded-2xl bg-indigo-300 cursor-pointer bg-gradient-to-tr from-purple-400 to-indigo-700">
         {!playVideo && (
           <button
-            onClick={() => setPlayVideo(!playVideo)}
+            onClick={() => startVideo()}
             className="absolute inset-auto w-16 h-16 text-white transform -translate-x-1/2 -translate-y-1/2 lg:w-28 lg:h-28 top-1/2 left-1/2"
           >
             <svg

@@ -1,18 +1,11 @@
 import Link from "next/link";
-import Image from "next/image";
 import React from "react";
+import { navigation, legal } from "../../lib/structure/constants";
+import { ClientLink } from "./ClientLink";
 import { Container } from "@/components/Container";
+import { FOOTER_CLICK } from "../../lib/analytics/events";
 
 export function Footer() {
-
-  const navigation = [
-    { label: "Vantaggi" , href: "#vantaggi" },
-    { label: "Come Funziona" , href: "#video" },
-    { label: "Testimonianze" , href: "#testimonianze" },
-    { label: "FAQ" , href: "#faq" },
-  ];
-
-  const legal = ["Terms", "Privacy", "Legal"];
   return (
     <div className="relative">
       <Container>
@@ -37,13 +30,14 @@ export function Footer() {
           <div>
             <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
               {navigation.map((item, index) => (
-                <Link
+                <ClientLink
                   key={index}
+                  event={{ event: FOOTER_CLICK, value: item.label }}
                   href={item.href}
                   className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700"
                 >
                   {item.label}
-                </Link>
+                </ClientLink>
               ))}
             </div>
           </div>

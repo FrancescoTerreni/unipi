@@ -1,32 +1,53 @@
 "use client";
+
 import Link from "next/link";
-import ThemeChanger from "./DarkSwitch";
+import { isNil } from "lodash";
 import { Disclosure } from "@headlessui/react";
 import { ClientLink } from "./ClientLink";
+import { useReactions } from '@/contexts/ReactionContext';
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { setReactionCount } from "../../lib/supabase/procedures";
+import { REACTION_LIKE } from "../../lib/supabase/constants/reaction";
+import { LIKE_CLICK, MENU_CLICK } from "../../lib/analytics/events";
+import { sendGTMEvent } from '@next/third-parties/google'
+import { navigation } from "../../lib/structure/constants";
 
 export const Navbar = () => {
-  const navigation = [
-    { label: "Vantaggi" , href: "#vantaggi" },
-    { label: "Come Funziona" , href: "#video" },
-    { label: "Testimonianze" , href: "#testimonianze" },
-    { label: "FAQ" , href: "#faq" },
-  ];
+
+  const reactionsState = useReactions();
+  const [interacted, setInteracted] = useLocalStorage('interacted');
+
+  /**
+   * Write on database for liked elements, and after sent the event to GA4.
+   * The interaction level should check if the user is allowed to do so.
+  */
+
+  const likeAction = async () => {
+    if (!interacted) {
+      const newCount = await setReactionCount(REACTION_LIKE);
+      reactionsState.setReaction((prev) => ({...prev, like: newCount }))
+      sendGTMEvent({ event: LIKE_CLICK, value: newCount })
+      setInteracted(true);
+    }
+  }
+
+  const displayGreetings = interacted ? ` 🎉 ${reactionsState.like} Grazie! :) ` : `❤️ ${reactionsState.like} Likes`;
 
   return (
     <div className="w-full">
       <nav className="container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-1">
 
-        {/* contattaci  */}
-        <div className="gap-3 nav__item mr-2 lg:flex ml-auto lg:ml-0 lg:order-2">
-            <ThemeChanger />
-            <div className="hidden mr-3 lg:flex nav__item">
-              <ClientLink 
-                href="/"
-                eventName="contactUs"
-                className="px-6 py-2 text-white bg-indigo-600 rounded-md md:ml-5"
-              >
-                Contattaci
-              </ClientLink>
+        <div className="gap-3 nav__item mr-2 lg:flex ml-auto lg:ml-0 lg:order-last">
+            <div className="mr-3 lg:flex nav__item">
+              {(!reactionsState.loading && !isNil(reactionsState.like)) &&
+                <ClientLink 
+                  href="/"
+                  callback={likeAction}
+                  className="px-6 py-2 text-white bg-indigo-600 rounded-md md:ml-5"
+                >
+                  {displayGreetings}
+                </ClientLink>
+              }
             </div>
         </div>
                 
@@ -63,9 +84,6 @@ export const Navbar = () => {
                           {item.label}
                       </Link>
                     ))}
-                    <Link href="/" className="w-full px-6 py-2 mt-3 text-center text-white bg-indigo-600 rounded-md lg:ml-5">         
-                        Get Started
-                    </Link>
                   </div>
                 </Disclosure.Panel>
             </div>
@@ -77,9 +95,13 @@ export const Navbar = () => {
           <ul className="items-center justify-end flex-1 pt-6 list-none lg:pt-0 lg:flex">
             {navigation.map((menu, index) => (
               <li className="mr-3 nav__item" key={index}>
-                <Link href={menu.href} className="inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800">
+                <ClientLink 
+                    href={menu.href}
+                    event={{ event: MENU_CLICK, value: menu.label }}
+                    className="inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800"
+                  >
                     {menu.label}
-                </Link>
+                </ClientLink>
               </li>
             ))}
           </ul>

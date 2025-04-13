@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { GoogleTagManager } from '@next/third-parties/google'
+import { ReactionProvider } from "@/contexts/ReactionContext";
 import "./globals.css";
 
 import { Navbar } from "@/components/Navbar";
@@ -27,9 +28,11 @@ export default function RootLayout({
       {isEnabled && <GoogleTagManager gtmId={gtmIdContainer} /> }
       <body className={inter.className}>
         <ThemeProvider attribute="class">
-          <Navbar />
-          <div>{children}</div>
-          <Footer />
+          <ReactionProvider>
+            <Navbar />
+            <div>{children}</div>
+            <Footer />
+          </ReactionProvider>
         </ThemeProvider>
       </body>
     </html>
