@@ -8,7 +8,16 @@ import { sendGTMEvent } from '@next/third-parties/google'
 import { LIKE_CLICK } from "../../lib/analytics/events";
 import { REACTION_LIKE } from "../../lib/supabase/constants/reaction";
 
-export const Cta = () => {
+interface CtaProps {
+  data: Cta
+}
+
+interface Cta {
+  title: string,
+  action: string
+}
+
+export const Cta = (props: Readonly<CtaProps>) => {
 
   const reactionsState = useReactions();
 
@@ -28,15 +37,17 @@ export const Cta = () => {
 
   const displayGreetings = reactionsState.interacted ? ` 🎉 ${reactionsState.like} Grazie! :) ` : `❤️ ${reactionsState.like} Likes`;
 
+  const { data } = props;
+
   return (
     <Container>
       <div className="flex flex-wrap items-center justify-between w-full max-w-4xl gap-5 mx-auto text-white bg-indigo-600 px-7 py-7 lg:px-12 lg:py-12 lg:flex-nowrap rounded-xl">
         <div className="flex-grow text-center lg:text-left">
           <h2 className="text-2xl font-medium lg:text-3xl">
-            Ti è stato utile questo contenuto? 
+            {data.title}
           </h2>
           <p className="mt-2 font-medium text-white text-opacity-90 lg:text-xl">
-            Faccelo sapere con un clic.
+            {data.action}
           </p>
         </div>
         <div className="flex-shrink-0 w-full text-center lg:w-auto">

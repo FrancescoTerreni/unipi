@@ -7,31 +7,56 @@ import { Testimonials } from "@/components/Testimonials";
 import { Faq } from "@/components/Faq";
 import { Cta } from "@/components/Cta";
 
-import { benefitOne, benefitTwo } from "@/components/data";
-export default function Home() {
+import { 
+  benefitOne,
+  benefitTwo,
+  heroSectionCopy,
+  subHeroSectionCopy,
+  testimonianzeSectionCopy,
+  faqSectionCopy,
+  videoSectionCopy,
+  faqdataCopy,
+  ctaCopy
+} from "@/components/data";
+
+/**
+ * Set all types.
+ * @TODO move all to types.ts file.
+*/
+type sectionTitleCopyKey = keyof typeof subHeroSectionCopy;
+type heroSectionCopyKey = keyof typeof heroSectionCopy;
+type benefitOneKey = keyof typeof benefitOne;
+type benefitTwoKey = keyof typeof benefitTwo;
+type videoSectionCopyKey = keyof typeof videoSectionCopy;
+type testimonianzeSectionCopyKey = keyof typeof testimonianzeSectionCopy;
+type faqSectionCopyKey = keyof typeof faqSectionCopy;
+type faqdataCopyKey = keyof typeof faqdataCopy;
+type ctaCopyKey = keyof typeof ctaCopy;
+
+export default function Home({ searchParams } : any ) {
+  const version = ['v1', 'v2'].includes(searchParams?.version) ? searchParams.version : 'v1';
+
   return (
     <Container>
-      <Hero />
+      <Hero data={heroSectionCopy[version as heroSectionCopyKey]} />
       <SectionTitle
-        preTitle="Telemedicina & Robotica"
-        title="Perché credere nell'ecografia a distanza"
+        preTitle={subHeroSectionCopy[version as sectionTitleCopyKey].preTitle}
+        title={subHeroSectionCopy[version as sectionTitleCopyKey].title}
       >
-        È una tecnologia che non sostituisce, ma avvicina.
-        Una mano robotica guidata da competenze umane. 
-        Una risposta concreta per aree rurali, strutture isolate, pazienti fragili o impossibilitati a spostarsi.
+        {subHeroSectionCopy[version as sectionTitleCopyKey].description}
       </SectionTitle>
 
       <section id="vantaggi">
-        <Benefits data={benefitOne} />
-        <Benefits imgPos="right" data={benefitTwo} />
+        <Benefits data={benefitOne[version as benefitOneKey]} />
+        <Benefits imgPos="right" data={benefitTwo[version as benefitTwoKey]} />
       </section>
 
       <section id="video">
         <SectionTitle
-          preTitle="Guarda il video"
-          title="Scopri come funziona l’ecografia a distanza"
+          preTitle={videoSectionCopy[version as videoSectionCopyKey].preTitle}
+          title={videoSectionCopy[version as videoSectionCopyKey].title}
         >
-          In questo breve video ti mostriamo come la robotica e la telemedicina possono collaborare per eseguire un’ecografia remota in tempo reale.
+          {videoSectionCopy[version as videoSectionCopyKey].description}
         </SectionTitle>
 
         <Video videoId="eq0vXSkse7k" />
@@ -39,25 +64,27 @@ export default function Home() {
 
       <section id="testimonianze">
         <SectionTitle
-          preTitle="Testimonianze"
-          title="Cosa dicono della Tele-ecografia"
+          preTitle={testimonianzeSectionCopy[version as testimonianzeSectionCopyKey].preTitle}
+          title={testimonianzeSectionCopy[version as testimonianzeSectionCopyKey].title}
         >
-          Ecco cosa raccontano medici, pazienti e professionisti della salute che hanno provato la tele-ecografia guidata da remoto.
-          Una tecnologia che convince, perché funziona.
+          {testimonianzeSectionCopy[version as testimonianzeSectionCopyKey].description}
         </SectionTitle>
 
         <Testimonials />
       </section>
 
       <section id="faq">
-        <SectionTitle preTitle="FAQ" title="Domande frequenti">
-          Dalla sicurezza al funzionamento: tutto quello che c’è da sapere sull’ecografia remota guidata da robot, spiegato in modo chiaro.
+        <SectionTitle 
+          preTitle={faqSectionCopy[version as faqSectionCopyKey].preTitle}
+          title={faqSectionCopy[version as faqSectionCopyKey].title}
+        >
+          {faqSectionCopy[version as faqSectionCopyKey].description}
         </SectionTitle>
 
-        <Faq />
+        <Faq data={faqdataCopy[version as faqdataCopyKey]}/>
       </section>
 
-      <Cta />
+      <Cta data={ctaCopy[version as ctaCopyKey]} />
 
     </Container>
   );

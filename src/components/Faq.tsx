@@ -4,11 +4,21 @@ import { Container } from "@/components/Container";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
 
-export const Faq = () => {
+interface FaqProps {
+  data: Faq[]
+}
+
+interface Faq {
+  question: string,
+  answer: string
+}
+
+export const Faq = (props: Readonly<FaqProps>) => {
+  const { data } = props;
   return (
     <Container className="!p-0">
       <div className="w-full max-w-2xl p-2 mx-auto rounded-2xl">
-        {faqdata.map((item, index) => (
+        {data.map((item, index) => (
           <div key={item.question} className="mb-5">
             <Disclosure>
               {({ open }) => (
@@ -33,22 +43,3 @@ export const Faq = () => {
     </Container>
   );
 }
-
-const faqdata = [
-  {
-    question: "Come funziona un’ecografia a distanza?",
-    answer: "Un braccio robotico esegue i movimenti dell’ecografo, controllato in tempo reale da un medico specialista collegato da remoto. L’esame è identico a quello tradizionale.",
-  },
-  {
-    question: "È sicura come un’ecografia normale?",
-    answer: "Sì, l’ecografia a distanza usa le stesse tecnologie e standard di sicurezza. Il medico ha pieno controllo dello strumento e interagisce con il paziente durante l’esame.",
-  },
-  {
-    question: "Dove può essere utilizzata?",
-    answer: "In ambulatori locali, strutture sanitarie periferiche, ospedali di comunità o anche in ambienti mobili. Serve solo una connessione stabile e il dispositivo robotico installato.",
-  },
-  {
-    question: "Serve personale specializzato in loco?",
-    answer: "Solo un operatore di supporto: il controllo completo è affidato al medico a distanza. Questo rende la tecnologia perfetta per aree con carenza di specialisti.",
-  },
-];
