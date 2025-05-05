@@ -1,5 +1,5 @@
 import Image from "next/image";
-import heroImg from "../../public/img/hero.png";
+import heroImg from "../../public/img/hero.jpeg";
 import Link from "next/link";
 import { Container } from "@/components/Container";
 
@@ -28,7 +28,7 @@ export const Hero = (props: Readonly<HeroProps>) => {
             <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
               <Link
                 href="#vantaggi"
-                className="px-8 py-4 text-lg font-medium text-center text-white bg-indigo-600 rounded-md cursor-pointer">
+                className="px-8 py-4 text-lg font-medium text-center text-white bg-teal-600 rounded-md cursor-pointer">
                 {data.cta}
               </Link>
             </div>

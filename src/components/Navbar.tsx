@@ -41,7 +41,7 @@ export const Navbar = () => {
                 <ClientLink 
                   href="/"
                   callback={likeAction}
-                  className="px-6 py-2 text-white bg-indigo-600 rounded-md md:ml-5"
+                  className="px-6 py-2 text-white bg-teal-600 rounded-md md:ml-5"
                 >
                   {displayGreetings}
                 </ClientLink>
@@ -54,7 +54,7 @@ export const Navbar = () => {
             <div>
                 <Disclosure.Button
                   aria-label="Toggle Menu"
-                  className="px-2 py-1 text-gray-500 rounded-md lg:hidden hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:text-gray-300 dark:focus:bg-trueGray-700">
+                  className="px-2 py-1 text-gray-500 rounded-md lg:hidden hover:text-teal-500 focus:text-teal-500 focus:bg-teal-100 focus:outline-none dark:text-gray-300 dark:focus:bg-trueGray-700">
                   <svg
                     className="w-6 h-6 fill-current"
                     xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,7 @@ export const Navbar = () => {
                 <Disclosure.Panel className="flex flex-wrap w-full my-5 lg:hidden">
                   <div>
                     {navigation.map((item, index) => (
-                      <Link key={index} href={item.href} className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 dark:focus:bg-gray-800 focus:outline-none">
+                      <Link key={index} href={item.href} className="w-full px-4 py-2 -ml-4 text-gray-500 rounded-md dark:text-gray-300 hover:text-teal-500 focus:text-teal-500 focus:bg-teal-100 dark:focus:bg-gray-800 focus:outline-none">
                           {item.label}
                       </Link>
                     ))}
@@ -96,7 +96,7 @@ export const Navbar = () => {
                 <ClientLink 
                     href={menu.href}
                     event={{ event: MENU_CLICK, value: menu.label }}
-                    className="inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800"
+                    className="inline-block px-4 py-2 text-lg font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-teal-500 focus:text-teal-500 focus:bg-teal-100 focus:outline-none dark:focus:bg-gray-800"
                   >
                     {menu.label}
                 </ClientLink>

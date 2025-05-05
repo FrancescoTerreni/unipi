@@ -27,7 +27,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       {isEnabled && <GoogleTagManager gtmId={gtmIdContainer} /> }
       <body className={inter.className}>
-        <ThemeProvider attribute="class">
+        <ThemeProvider forcedTheme="light" attribute="class">
           <ReactionProvider>
             <Navbar />
             <div>{children}</div>

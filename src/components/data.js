@@ -7,8 +7,8 @@ import {
   SunIcon,
 } from "@heroicons/react/24/solid";
 
-import benefitOneImg from "../../public/img/benefit-one.png";
-import benefitTwoImg from "../../public/img/benefit-two.png";
+import benefitOneImg from "../../public/img/benefit-one.jpeg";
+import benefitTwoImg from "../../public/img/benefit-two.jpeg";
 
 const heroSectionCopy = {
   v1: {
@@ -20,7 +20,7 @@ const heroSectionCopy = {
     cta: 'Scopri di più'
   },
   v2: {
-    title: `Tele-ecografia robotica per il tuo centro`,
+    title: `Tele-ecografia robotica per il tuo centro medico`,
     description: `
       Amplia l'offerta clinica e raggiungi nuovi pazienti. 
       Integra l’ecografia a distanza nel tuo centro medico in modo sicuro e scalabile.
@@ -44,7 +44,7 @@ const subHeroSectionCopy = {
     title: `Nuove opportunità per la diagnostica`,
     description: `
       L’ecografia remota consente di estendere i servizi anche dove prima era impossibile. 
-      Una soluzione concreta per ridurre le liste d’attesa e migliorare la copertura territoriale.
+      Una soluzione concreta per migliorare la copertura territoriale.
     `
   }
 };
@@ -88,7 +88,7 @@ const benefitOne = {
         icon: <ChartBarSquareIcon />,
       },
       {
-        title: "Valore competitivo immediato",
+        title: "Incremento del valore competitivo",
         desc: "Una soluzione innovativa che differenzia la tua struttura e la rende attrattiva.",
         icon: <CursorArrowRaysIcon />,
       },
@@ -221,7 +221,7 @@ const faqdataCopy = {
     },
     {
       question: "Serve formazione specifica per il personale?",
-      answer: "È previsto un breve percorso di affiancamento iniziale. L’uso del sistema è semplice e intuitivo per gli operatori di supporto.",
+      answer: "A seconda del pacchetto di acquisto, è possibile ricevere affiancamento per i medici, se necessario.",
     },
     {
       question: "È compatibile con i protocolli clinici esistenti?",
@@ -229,7 +229,7 @@ const faqdataCopy = {
     },
     {
       question: "Quali sono i vantaggi economici per il centro?",
-      answer: "Riduci costi di trasferta per specialisti, ottimizzi i tempi, aumenti l’accesso ai servizi in sedi decentrate. Il ritorno sull’investimento è rapido.",
+      answer: "Riduci costi di trasferta per specialisti, ottimizzi i tempi, aumenti l’accesso ai servizi in sedi decentrate.",
     }
   ]
 };

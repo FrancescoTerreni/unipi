@@ -41,7 +41,7 @@ export const Cta = (props: Readonly<CtaProps>) => {
 
   return (
     <Container>
-      <div className="flex flex-wrap items-center justify-between w-full max-w-4xl gap-5 mx-auto text-white bg-indigo-600 px-7 py-7 lg:px-12 lg:py-12 lg:flex-nowrap rounded-xl">
+      <div className="flex flex-wrap items-center justify-between w-full max-w-4xl gap-5 mx-auto text-white bg-teal-600 px-7 py-7 lg:px-12 lg:py-12 lg:flex-nowrap rounded-xl">
         <div className="flex-grow text-center lg:text-left">
           <h2 className="text-2xl font-medium lg:text-3xl">
             {data.title}
@@ -54,7 +54,7 @@ export const Cta = (props: Readonly<CtaProps>) => {
         <button
             onClick={likeAction}
             className={`inline-block py-3 mx-auto text-lg font-medium text-center rounded-md px-7 lg:px-10 lg:py-5 transition-all duration-200
-              ${reactionsState.loading ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-white text-indigo-600 hover:bg-gray-100"}
+              ${reactionsState.loading ? "bg-gray-200 text-gray-400 cursor-not-allowed" : "bg-white text-teal-600 hover:bg-gray-100"}
             `}
           >
             {reactionsState.loading || !reactionsState.like ? (

@@ -9,7 +9,7 @@ import userThreeImg from "../../public/img/user3.jpg";
 export const Testimonials = () => {
   return (
     <Container>
-      <div className="grid gap-10 lg:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-10 lg:grid-cols-2 xl:grid-cols-3 mb-20">
         <div className="lg:col-span-2 xl:col-auto">
           <div className="flex flex-col justify-between w-full h-full bg-gray-100 px-14 rounded-2xl py-14 dark:bg-trueGray-800">
             <p className="text-2xl leading-normal ">
@@ -84,7 +84,7 @@ function Mark(props: { readonly children: React.ReactNode }) {
   return (
     <>
       {" "}
-      <mark className="text-indigo-800 bg-indigo-100 rounded-md ring-indigo-100 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200">
+      <mark className="text-teal-800 bg-teal-100 rounded-md ring-teal-100 ring-4 dark:ring-teal-900 dark:bg-teal-900 dark:text-teal-200">
         {props.children}
       </mark>{" "}
     </>
