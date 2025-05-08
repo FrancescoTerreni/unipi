@@ -3,6 +3,8 @@ import React from "react";
 import { Container } from "@/components/Container";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
+import { sendGTMEvent } from '@next/third-parties/google'
+import { FAQ_CLICK } from "../../lib/analytics/events";
 
 interface FaqProps {
   data: Faq[]
@@ -15,6 +17,13 @@ interface Faq {
 
 export const Faq = (props: Readonly<FaqProps>) => {
   const { data } = props;
+
+  const faqAction = async (item: Faq, open: boolean) => {
+    if (!open) {
+      sendGTMEvent({ event: FAQ_CLICK, value: item.question })
+    }
+  }
+
   return (
     <Container className="!p-0">
       <div className="w-full max-w-2xl p-2 mb-20 mx-auto rounded-2xl">
@@ -22,8 +31,10 @@ export const Faq = (props: Readonly<FaqProps>) => {
           <div key={item.question} className="mb-5">
             <Disclosure>
               {({ open }) => (
-                <div>
-                  <DisclosureButton className="flex items-center justify-between w-full px-4 py-4 text-lg text-left text-gray-800 rounded-lg bg-gray-50 hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-teal-100 focus-visible:ring-opacity-75 dark:bg-trueGray-800 dark:text-gray-200">
+                <div onClick={() => faqAction(item, open)}>
+                  <DisclosureButton
+                      className="flex items-center justify-between w-full px-4 py-4 text-lg text-left text-gray-800 rounded-lg bg-gray-50 hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-teal-100 focus-visible:ring-opacity-75 dark:bg-trueGray-800 dark:text-gray-200"
+                    >
                     <span>{item.question}</span>
                     <ChevronUpIcon
                       className={`${
