@@ -1,7 +1,8 @@
 import Image from "next/image";
 import heroImg from "../../public/img/hero.jpeg";
-import Link from "next/link";
+import { ClientLink } from "./ClientLink";
 import { Container } from "@/components/Container";
+import { CONTACT_CLICK } from "../../lib/analytics/events";
 
 interface HeroProps {
   data: {
@@ -26,11 +27,12 @@ export const Hero = (props: Readonly<HeroProps>) => {
             </p>
 
             <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
-              <Link
+              <ClientLink
                 href="#vantaggi"
+                event={{ event: CONTACT_CLICK, value: data.cta }}
                 className="px-8 py-4 text-lg font-medium text-center text-white bg-teal-600 rounded-md cursor-pointer">
                 {data.cta}
-              </Link>
+              </ClientLink>
             </div>
             
           </div>
